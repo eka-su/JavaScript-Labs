@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Todo List</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Главный экран -->
+
+    <section id="mainScreen" class="screen">
+
+        <!-- Пустой экран -->
+
+        <div id="emptyState" class="empty-state">
+
+            <div class="empty-icon">
+                <img src="icons/ic_logo.svg" alt="Todo List">
+            </div>
+
+            <p>Add a task to get started</p>
+
+        </div>
+
+
+        <!-- Список задач -->
+
+        <div id="todoList" class="todo-list"></div>
+
+
+        <!-- Кнопка добавления -->
+
+        <button
+            class="add-button"
+            onclick="openModal()"
+        >
+            <img
+                src="icons/ic_plus.svg"
+                alt="Добавить задачу"
+            >
+        </button>
+
+    </section>
+
+
+    <!-- Экран создания/редактирования заметок -->
+
+    <section
+        id="modalScreen"
+        class="screen modal-screen"
+    >
+
+        <!-- Верхняя панель -->
+
+        <header class="modal-header">
+
+            <!-- Назад -->
+
+            <button
+                class="header-button"
+                onclick="closeModal()"
+            >
+                <img
+                    src="icons/ic_back.svg"
+                    alt="Назад"
+                >
+            </button>
+
+
+            <!-- Сохранить -->
+
+            <button
+                class="header-button"
+                onclick="createTask()"
+            >
+                <img
+                    src="icons/ic_check.svg"
+                    alt="Сохранить"
+                >
+            </button>
+
+        </header>
+
+
+        <!-- Поле ввода -->
+
+        <textarea
+            id="taskInput"
+            placeholder="Add New Task..."
+        ></textarea>
+
+    </section>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

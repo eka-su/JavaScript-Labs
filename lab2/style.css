@@ -1,0 +1,420 @@
+/* Основыне стили */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: #dcdcdc;
+}
+
+
+/* Экран телефона */
+.app {
+    width: 390px;
+    height: 844px;
+
+    margin: 30px auto;
+
+    background: #F0F0F0;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    padding-top: 40px;
+}
+
+
+/* Пустой экран */
+
+.empty-state {
+    position: absolute;
+
+    top: 194px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 271px;
+
+    text-align: center;
+}
+
+
+/* Иконка логотип */
+
+.empty-icon {
+    width: 271px;
+    height: 248px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.empty-icon img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* Текст пустого экрана*/
+
+.empty-state p {
+    margin-top: 20px;
+
+    color: #000000;
+
+    font-size: 18px;
+
+    text-align: center;
+}
+
+
+/* Кнопка добавления*/
+
+.add-button {
+    position: absolute;
+
+    bottom: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 60px;
+    height: 60px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #FFB309;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.add-button img {
+    width: 28px;
+    height: 28px;
+
+    display: block;
+}
+
+
+.add-button:hover {
+    opacity: 0.9;
+}
+
+
+/* Список задач/заметок */
+
+.todo-list {
+    width: 100%;
+
+    height: calc(100% - 40px);
+
+    padding: 20px 16px 100px;
+
+    overflow-y: auto;
+}
+
+.todo-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+    background: #CFCFCF;
+    border-radius: 10px;
+}
+
+/* карточка задачи */
+
+.todo-item {
+    width: 100%;
+
+    min-height: 70px;
+
+    margin-bottom: 15px;
+
+    padding: 15px;
+
+    background: #FFFFFF;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+/* Кнопка выполнения*/
+
+.done-button {
+    width: 25px;
+    height: 25px;
+
+    padding: 0;
+
+    flex-shrink: 0;
+
+    border: 2px solid #F0F0F0;
+    border-radius: 50%;
+
+    background: #F0F0F0;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.done-button.done {
+    background: #37D7B3;
+
+    border-color: #37D7B3;
+}
+
+
+.done-button img {
+    width: 14px;
+    height: 14px;
+    display: block;
+    filter: brightness(0) invert(1);
+}
+
+/* Текст задачи */
+
+.task-text {
+    flex: 1;
+
+    min-width: 0;
+
+    font-size: 16px;
+
+    color: #000000;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* Выполненная задача */
+
+.task-text.completed {
+    color: #7D7D7D;
+
+    text-decoration: line-through;
+}
+
+
+/* Кнопки задачи*/
+
+.task-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+
+.action-button {
+    width: 25px;
+    height: 25px;
+
+    padding: 0;
+
+    border: none;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Редактирование */
+
+.edit-button {
+    background: transparent;
+}
+
+
+.edit-button img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+
+/* Удаление */
+
+.delete-button {
+    width: 25px;
+    height: 25px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #F80F0F;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.delete-button img {
+    width: 12px;
+    height: 12px;
+
+    display: block;
+}
+
+
+/* Экран создания */
+
+.modal-screen {
+    display: none;
+
+    background: #F0F0F0;
+}
+
+
+/* Верхняя панель */
+
+.modal-header {
+    width: 100%;
+
+    height: 70px;
+
+    padding: 0 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* кнопка назад/сохранить */
+
+.header-button {
+    width: 30px;
+    height: 30px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.header-button img {
+    width: 25px;
+    height: 25px;
+
+    display: block;
+}
+
+
+/* Поле ввода */
+
+#taskInput {
+    width: calc(100% - 100px);
+
+    margin: 29px 50px 10px;
+
+    min-height: 250px;
+
+    border: none;
+
+    outline: none;
+
+    resize: none;
+
+    background: #F0F0F0;
+
+    color: #7D7D7D;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 20px;
+
+    line-height: 1.5;
+}
+
+
+#taskInput::placeholder {
+    color: #7D7D7D;
+}
+
+
+/* Адаптация под телефон */
+
+@media (max-width: 430px) {
+
+    body {
+        background: #F0F0F0;
+    }
+
+
+    .app {
+        width: 100%;
+        height: 100vh;
+
+        margin: 0;
+
+        border-radius: 0;
+
+        box-shadow: none;
+    }
+}
