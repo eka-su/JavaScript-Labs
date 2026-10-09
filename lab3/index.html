@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Конвертер валют</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- для конвертации -->
+    <script src="https://www.cbr-xml-daily.ru/money.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Экран конвентатора-->
+
+    <section id="converterScreen" class="screen">
+
+        <h1>Конвертер валют</h1>
+
+        <!-- Первая валюта -->
+        <button class="currency-card" id="fromCurrencyCard">
+
+            <div class="currency-info">
+                <div class="currency-code" id="fromCode">RUB</div>
+                <div class="currency-name" id="fromName">
+                    Российский рубль
+                </div>
+            </div>
+
+            <div class="arrow">›</div>
+
+            <div class="amount" id="fromAmount">
+                0
+            </div>
+
+        </button>
+
+
+        <!-- Вторая валюта -->
+        <button class="currency-card" id="toCurrencyCard">
+
+            <div class="currency-info">
+                <div class="currency-code" id="toCode">USD</div>
+                <div class="currency-name" id="toName">
+                    Доллар США
+                </div>
+            </div>
+
+            <div class="arrow">›</div>
+
+            <div class="amount" id="toAmount">
+                0
+            </div>
+
+        </button>
+
+
+        <!-- Кнопки AC и удаления -->
+        <div class="top-buttons">
+
+            <button class="action-button" id="clearButton">
+                AC
+            </button>
+
+            <button class="action-button" id="deleteButton">
+                <img src="icons/ic_delete.svg" alt="Удалить">
+            </button>
+
+        </div>
+
+
+        <!-- Клавиатура -->
+        <div class="keyboard">
+
+            <button class="number-button">7</button>
+            <button class="number-button">8</button>
+            <button class="number-button">9</button>
+
+            <button class="number-button">4</button>
+            <button class="number-button">5</button>
+            <button class="number-button">6</button>
+
+            <button class="number-button">1</button>
+            <button class="number-button">2</button>
+            <button class="number-button">3</button>
+
+            <button class="zero-button">0</button>
+            <button class="number-button">,</button>
+
+        </div>
+
+    </section>
+
+
+    <!-- Экран выбора валюты-->
+
+    <section id="currencyScreen" class="screen hidden">
+
+        <div class="currency-header">
+
+            <button id="backButton" class="back-button">
+                ←
+            </button>
+
+            <h1>Изменить валюту</h1>
+
+        </div>
+
+
+        <!-- Поиск -->
+        <div class="search-wrapper">
+
+            <span class="search-icon">⌕</span>
+
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Search currency..."
+            >
+
+            <button id="clearSearch" class="clear-search">
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- Список валют -->
+        <div id="currencyList" class="currency-list"></div>
+
+    </section>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
