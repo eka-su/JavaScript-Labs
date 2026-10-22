@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TypingTest</title>
+
+  <!-- Подключение шрифта Roboto Mono  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Подключение стилей страницы -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Шапка сайта с логотипом и возвратом на главную -->
+  <header class="brand">
+    <button id="homeButton" class="brand-link" type="button" aria-label="На главную">
+      <img class="logo-icon" src="icons/ic_logo.svg" alt="">
+      <span>TypingTest</span>
+    </button>
+  </header>
+
+  <main class="app">
+    <!-- Настройки режима и запуск теста -->
+    <section id="settings" class="settings">
+      <div class="mode-bar">
+        <!-- Переключение между тестом на время и на количество слов -->
+        <button class="mode-button active" data-mode="time" type="button">
+          <img class="ui-icon mode-icon" src="icons/ic_time.svg" alt="">
+          <span>время</span>
+        </button>
+
+        <button class="mode-button" data-mode="words" type="button">
+          <img class="ui-icon mode-icon" src="icons/ic_words.svg" alt="">
+          <span>слова</span>
+        </button>
+
+        <span class="divider"></span>
+
+        <!-- Варианты длительности теста или количества слов -->
+        <div id="options" class="option-list"></div>
+      </div>
+
+      <button id="startButton" class="primary-button" type="button">
+        <span>начать тест</span>
+        <img class="ui-icon" src="icons/ic_next.svg" alt="">
+      </button>
+    </section>
+
+    <!-- Область прохождения теста, скрываем её до начала теста -->
+    <section id="testArea" class="test-area hidden">
+      <div class="test-status">
+        <!-- Прогресс отображается в режиме подсчёта слов -->
+        <span id="progress" class="hidden">0/50</span>
+        <span id="timer">50</span>
+      </div>
+
+      <!-- Текст, который нужно напечатать -->
+      <div id="textDisplay" class="text-display" aria-hidden="true"></div>
+
+      <!-- Поле ввода текста пользователя -->
+      <textarea
+        id="typingInput"
+        class="typing-input"
+        aria-label="Ввод текста"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        disabled
+      ></textarea>
+
+      <button id="restartButton" class="secondary-button restart-button" type="button">
+        <span>заново</span>
+        <img class="ui-icon" src="icons/ic_reload.svg" alt="">
+      </button>
+    </section>
+
+    <!-- Экран результатов после завершения теста -->
+    <section id="result" class="result hidden">
+      <div class="stats-table">
+        <div class="stat-labels">
+          <span>тип теста</span>
+          <span>cpm</span>
+          <span>точность</span>
+          <span>символы</span>
+          <span>ошибки</span>
+        </div>
+
+        <!-- Значения статистики -->
+        <div class="stat-values">
+          <strong id="resultMode">время</strong>
+          <strong id="cpm">0</strong>
+          <strong id="accuracy">100%</strong>
+          <strong id="characters">0</strong>
+          <strong id="errors">0</strong>
+        </div>
+      </div>
+
+      <!-- Кнопки для повторного запуска или перехода к следующему тексту -->
+      <div class="result-actions">
+        <button id="resultRestart" class="secondary-button" type="button">
+          <span>заново</span>
+          <img class="ui-icon" src="icons/ic_reload.svg" alt="">
+        </button>
+
+        <button id="resultNext" class="primary-button" type="button">
+          <span>следующий текст</span>
+          <img class="ui-icon" src="icons/ic_next.svg" alt="">
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Подключение логики теста -->
+  <script src="script.js"></script>
+</body>
+</html>

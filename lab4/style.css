@@ -1,0 +1,428 @@
+/* Основные цвета приложения */
+
+:root {
+  --bg: #282C34;       /* Цвет фона страницы */
+  --panel: #313641;    /* Цвет панелей и второстепенных кнопок */
+  --muted: #727B8A;    /* Приглушённый цвет текста и иконок */
+  --yellow: #F8B415;   /* Жёлтый цвет активных элементов */
+  --red: #EE5867;      /* Цвет неправильно введённых символов */
+  --dark-red: #842F3B; /* Цвет лишних символов */
+  --white: #F5F6F8;    /* Основной правильный цвет текста */
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* Настройки всей HTML-страницы */
+html {
+  min-height: 100%;
+  background: var(--bg);
+}
+
+/* Основные стили страницы */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--white);
+  font-family: "Roboto Mono", monospace;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+/* Общие настройки кнопок */
+button {
+  border: none;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 5px;
+}
+
+/* Логотип и название сайта */
+.brand {
+  position: absolute;
+  z-index: 2;
+  top: 25px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Кнопка с логотипом и названием */
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  background: transparent;
+  color: var(--white);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Меняем цвет названия при наведении */
+.brand-link:hover {
+  color: var(--yellow);
+}
+
+/* Стиль текстового логотипа, если он используется */
+.logo {
+  color: var(--yellow);
+  font-size: 26px;
+}
+
+/* Основная область приложения */
+.app {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 110px 3vw 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Контейнер настроек теста */
+.settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Панель переключения режимов и параметров */
+.mode-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  min-height: 60px;
+  padding: 14px 30px;
+  background: var(--panel);
+  border-radius: 18px;
+}
+
+/* Кнопки выбора режима теста */
+.mode-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Подсвечиваем выбранный режим и активный параметр */
+.mode-button.active,
+.option-button.active {
+  color: var(--yellow);
+}
+
+/* Вертикальная линия между режимами и параметрами */
+.divider {
+  width: 3px;
+  height: 30px;
+  border-radius: 16px;
+  background: var(--bg);
+}
+
+/* Контейнер кнопок с параметрами теста */
+.option-list {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Кнопки выбора параметров */
+.option-button {
+  padding: 5px 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Основные и второстепенные кнопки */
+
+.primary-button,
+.secondary-button {
+  min-height: 60px;
+  padding: 16px 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 18px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: filter 120ms ease, background 120ms ease;
+}
+
+/* Основная кнопка — жёлтая */
+.primary-button {
+  background: var(--yellow);
+  color: var(--bg);
+}
+
+/* Второстепенная кнопка — цвет панели */
+.secondary-button {
+  background: var(--panel);
+  color: var(--muted);
+}
+
+/* Немного осветляем кнопки при наведении */
+.primary-button:hover,
+.secondary-button:hover {
+  filter: brightness(1.08);
+}
+
+/* Экран печати */
+
+/* Контейнер тестирования */
+.test-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Таймер и индикатор прогресса */
+.test-status {
+  width: 100%;
+  min-height: 38px;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--yellow);
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+/* Область с текстом, который нужно напечатать */
+.text-display {
+  position: relative;
+  width: 100%;
+  height: 5.1em;
+  overflow: hidden;
+  color: var(--muted);
+  font-family: "Roboto Mono", monospace;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  user-select: none;
+  scroll-behavior: smooth;
+  text-align: left;
+}
+
+/* Слова располагаются в строке и могут переноситься */
+.word {
+  display: inline;
+  white-space: normal;
+}
+
+/* Отдельные символы текста */
+.char {
+  position: relative;
+  white-space: pre;
+}
+
+/* Правильно введённые символы */
+.char.correct {
+  color: var(--white);
+}
+
+/* Ошибочно введённые символы */
+.char.incorrect {
+  color: var(--red);
+}
+
+/* Лишние символы, введённые пользователем */
+.char.extra {
+  color: var(--dark-red);
+}
+
+/* Подчёркиваем слово, в котором есть ошибка */
+.word.word-error {
+  text-decoration: underline;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+/* Курсор показывает позицию текущего символа */
+.char.cursor::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 3px;
+  height: 1.1em;
+  left: -2px;
+  top: 0.17em;
+  border-radius: 2px;
+  background: var(--yellow);
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* Анимация мигания курсора */
+@keyframes cursor-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* Поле ввода скрыто за пределами экрана,
+   но используется для получения текста с клавиатуры */
+.typing-input {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  opacity: 0;
+  resize: none;
+}
+
+/* Отступ над кнопкой перезапуска */
+.restart-button {
+  margin-top: 34px;
+}
+
+/* Экран статистики */
+
+/* Контейнер результатов */
+.result {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+/* Общий контейнер статистики */
+.stats-table {
+  width: 100%;
+}
+
+/* Сетка названий и значений статистики */
+.stat-labels,
+.stat-values {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  gap: 12px;
+  align-items: center;
+  text-align: center;
+}
+
+/* Названия показателей */
+.stat-labels {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Значения статистики */
+.stat-values {
+  color: var(--yellow);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Убираем стандартное выделение жирным */
+.stat-values strong {
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+
+/* Контейнер кнопок на экране результатов */
+.result-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 38px;
+}
+
+/* Скрываем элементы, пока они не нужны */
+.hidden {
+  display: none !important;
+}
+
+/* SVG-иконки интерфейса*/
+
+/* Иконка логотипа */
+.logo-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Общие размеры иконок в кнопках */
+.ui-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Выравнивание иконок и текста в режимах */
+.mode-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Выравнивание содержимого кнопок действий */
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Повторное объявление отступа кнопки перезапуска */
+.restart-button {
+  margin-top: 34px;
+}
+
+/* Убираем стандартное оформление кнопки логотипа */
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* Меняем цвет иконки активного режима на жёлтый */
+.mode-button.active .mode-icon {
+  filter: brightness(0) saturate(100%)
+          invert(65%) sepia(94%)
+          saturate(1000%) hue-rotate(355deg);
+}
