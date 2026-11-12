@@ -1,0 +1,639 @@
+/* Глобальные переменные и цветовая палитра */
+:root {
+  color-scheme: light;
+  --background: #f1f3f5;
+  --surface: #ffffff;
+  --field: #f5f6f8;
+  --text: #171717;
+  --muted: #6f7378;
+  --line: #e7e9ec;
+  --green: #15bb70;
+  --green-dark: #0f9659;
+  --red: #e14d4d;
+  --radius: 20px;
+  --shadow: 0 8px 30px rgba(12, 40, 54, 0.09);
+}
+
+/* Сброс стандартных стией браузера */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+  font-family: Roboto, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* Единый шрифт для элементов управления */
+button,
+input,
+select {
+  font: inherit;
+}
+
+/* Отключение стандартной подсветки и настройка фокуса */
+button,
+a,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(21, 187, 112, 0.2);
+  outline-offset: 2px;
+}
+
+/* Общий контейнер страницы*/
+.container {
+  width: min(1100px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+/* Шапка сайта и нафигации */
+.header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  border-bottom: 1px solid var(--line);
+  background: rgba(249, 250, 252, 0.96);
+}
+
+.header__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 68px;
+  gap: 20px;
+}
+
+/* Логотип и название приложения */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.brand__mark {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--green);
+  color: white;
+  font-size: 20px;
+}
+
+/* Основные ссылки навигации */
+.nav {
+  display: flex;
+  gap: 8px;
+}
+
+.nav__link {
+  padding: 9px 15px;
+  border-radius: 12px;
+  color: var(--muted);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav__link:hover,
+.nav__link.is-active {
+  background: #e6f8ef;
+  color: var(--green-dark);
+}
+
+/* Универсальные кнопки с иконками */
+.icon-button,
+.toast__close {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  place-items: center;
+  border: 0;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 3px 12px rgba(12, 40, 54, 0.08);
+}
+
+/* Эффект нажатия на интерактивные элементы */
+.icon-button:active,
+.button:active,
+.delete-button:active {
+  transform: scale(0.97);
+}
+
+/* Основная область страницы */
+.main {
+  min-height: calc(100vh - 68px);
+  padding-block: 38px 65px;
+}
+
+/* Заголовки и статус обновления данных*/
+
+/* Общая компоновка заголовков */
+.page-heading,
+.coin-header,
+.card-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Заголовок страницы */
+.page-heading {
+  margin-bottom: 24px;
+}
+
+.page-heading h1,
+.coin-title h1 {
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.page-heading p,
+.muted {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+/* Индикатор обновления данных */
+.update-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Анимация загрузки */
+.spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #c9f0dc;
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Оббщий стиль карточек*/
+
+.panel {
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+/* Поиск и фильтрация криптовалют */
+
+/* Сетка фильтров */
+.filters {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) repeat(2, minmax(130px, 0.35fr)) auto;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+/* Контейнер поля ввода */
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.field label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Поля ввода и выпадающие списки */
+.input,
+.select {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 13px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  outline: none;
+  background: var(--field);
+  color: var(--text);
+}
+
+/* Подсветка активного поля */
+.input:focus,
+.select:focus {
+  border-color: var(--green);
+}
+
+/* Основная кнопка */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 18px;
+  cursor: pointer;
+  border: 0;
+  border-radius: 12px;
+  background: var(--green);
+  color: white;
+  font-weight: 500;
+}
+
+.button:hover {
+  background: var(--green-dark);
+}
+
+/* Второстепенная кнопка */
+.button--secondary {
+  background: var(--field);
+  color: var(--text);
+}
+
+.button--secondary:hover {
+  background: #e8eaed;
+}
+
+/* Выравнивание кнопки внутри фильтров */
+.filters .button {
+  align-self: end;
+}
+
+/* Таблица криптовалют */
+
+/* Контейнер с горизонтальной прокруткой */
+.table-wrap {
+  overflow-x: auto;
+}
+
+/* Основная таблица рынка */
+.market-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+/* Ячейки таблицы */
+.market-table th,
+.market-table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+}
+
+/* Выравнивание первых двух столбцов */
+.market-table th:first-child,
+.market-table td:first-child,
+.market-table th:nth-child(2),
+.market-table td:nth-child(2) {
+  text-align: left;
+}
+
+/* Заголовки столбцов */
+.market-table th {
+  background: #fafbfc;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* Кнопки сортировки */
+.sort-button {
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.sort-button:hover,
+.coin-cell a:hover {
+  color: var(--green-dark);
+}
+
+/* Подсветка строки при наведении */
+.market-table tbody tr:hover {
+  background: #fbfdfc;
+}
+
+/* Убираем нижнюю границу последней строки */
+.market-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Информация о криптовалюте в таблице */
+
+/* Иконка, название и символ монеты */
+.coin-cell,
+.coin-title {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.coin-cell img,
+.coin-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+/* Ссылка с названием криптовалюты */
+.coin-cell a {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Символ криптовалюты */
+.symbol {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* Цветовые обозначения изменения цены */
+.positive { color: var(--green-dark); }
+.negative { color: var(--red); }
+
+/* Состояние загрузки и пустых результатов */
+.empty-state,
+.loading-state {
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+  padding: 30px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Страницы детально информации о монете*/
+
+/* Ссылка возврата к списку */
+.back-link {
+  display: inline-flex;
+  margin-bottom: 20px;
+  color: var(--green-dark);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Шапка страницы монеты */
+.coin-header {
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Увеличенная иконка монеты */
+.coin-logo {
+  width: 48px;
+  height: 48px;
+}
+
+/* Отображение текущей цены */
+.coin-price {
+  text-align: right;
+}
+
+.coin-price strong {
+  display: block;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+/* Сетка графика и конвертора */
+.detail-grid,
+.portfolio-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 0.9fr);
+  align-items: start;
+  gap: 16px;
+}
+
+/* Отдельная компоновка портфеля */
+.portfolio-layout {
+  grid-template-columns: minmax(280px, 0.75fr) minmax(0, 1.45fr);
+}
+
+/* Внутренние отступы карточек */
+.chart-card,
+.converter-card,
+.form-card,
+.summary-card {
+  padding: 20px;
+}
+
+/* Заголовки карточек и период графика*/
+
+/* Заголовок карточки */
+.card-heading {
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.card-heading h2,
+.converter-card h2,
+.form-card h2,
+.summary-card h2 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Кнопки выбора периода графика */
+.timeframes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.timeframe {
+  padding: 7px 10px;
+  cursor: pointer;
+  border: 0;
+  border-radius: 10px;
+  background: var(--field);
+  color: var(--muted);
+}
+
+.timeframe.is-active {
+  background: #e3f8ed;
+  color: var(--green-dark);
+}
+
+/* График и конвертор валют*/
+
+/* Область отображения графика */
+.chart-container {
+  position: relative;
+  height: 340px;
+}
+
+/* Отступы между полями конвертера и формы операций */
+.converter-card .field:first-of-type,
+.transaction-form .field:first-child {
+  margin-top: 18px;
+}
+
+.converter-card .field + .field,
+.transaction-form .field + .field {
+  margin-top: 12px;
+}
+
+/* Результат конвертации */
+.converter-result {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--field);
+  color: var(--green-dark);
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Форма операций и сводка профиля */
+
+/* Кнопка добавления операции */
+.transaction-form .button {
+  width: 100%;
+  margin-top: 18px;
+}
+
+/* Сетка показателей портфеля */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 18px 0 20px;
+}
+
+/* Отдельный показатель портфеля */
+.summary-item {
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--field);
+}
+
+.summary-item span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.summary-item strong {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Список транзакций портфеля */
+
+/* Контейнер операций */
+.transactions {
+  display: grid;
+  gap: 0;
+  list-style: none;
+}
+
+/* Отдельная операция */
+.transaction {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Название криптовалюты в операции */
+.transaction__name {
+  font-weight: 500;
+}
+
+/* Дополнительная информация об операции */
+.transaction small {
+  display: block;
+  color: var(--muted);
+}
+
+/* Кнопка удаления операции */
+.delete-button {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  place-items: center;
+  border: 0;
+  border-radius: 12px;
+  background: #fff0f0;
+  color: var(--red);
+  font-size: 20px;
+}
+
+/* Уведосления об ошибках апи*/
+
+/* Всплывающее уведомление */
+.toast {
+  position: fixed;
+  z-index: 50;
+  right: 22px;
+  bottom: 22px;
+  display: flex;
+  width: min(400px, calc(100% - 32px));
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+/* Скрытие уведомления */
+.toast[hidden] { display: none; }
+
+/* Текст уведомления */
+.toast p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Кнопка закрытия уведомления */
+.toast__close {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  box-shadow: none;
+  font-size: 20px;
+}
