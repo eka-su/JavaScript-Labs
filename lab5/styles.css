@@ -228,6 +228,7 @@ select:focus-visible {
 .field {
   display: grid;
   gap: 7px;
+  min-width: 0;
 }
 
 .field label {
@@ -239,6 +240,8 @@ select:focus-visible {
 .input,
 .select {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   min-height: 46px;
   padding: 10px 13px;
   border: 2px solid transparent;
@@ -246,6 +249,85 @@ select:focus-visible {
   outline: none;
   background: var(--field);
   color: var(--text);
+}
+
+/* Собственный список монет всегда равен ширине поля */
+.coin-picker {
+  position: relative;
+  min-width: 0;
+}
+
+.coin-picker__button {
+  display: block;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 10px 40px 10px 13px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  outline: none;
+  background: var(--field);
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coin-picker__button::after {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  content: "⌄";
+  color: var(--muted);
+  transform: translateY(-55%);
+}
+
+.coin-picker__button:focus-visible,
+.coin-picker__button.is-selected {
+  border-color: var(--green);
+}
+
+.coin-picker__button:disabled {
+  cursor: wait;
+  color: var(--muted);
+}
+
+.coin-picker__menu {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 12px 24px rgba(20, 28, 35, 0.14);
+}
+
+.coin-picker__option {
+  display: block;
+  width: 100%;
+  padding: 10px 13px;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coin-picker__option:hover,
+.coin-picker__option:focus-visible {
+  background: #e8f8f0;
+  outline: none;
 }
 
 /* Подсветка активного поля */

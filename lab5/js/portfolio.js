@@ -27,25 +27,52 @@ function createTransactionForm(state, actions) {
 
   const coinField = createElement("div", "field");
   const coinLabel = createElement("label", "", "Монета");
-  const coinSelect = createElement("select", "select");
-  coinLabel.htmlFor = "transaction-coin";
-  coinSelect.id = "transaction-coin";
-  coinSelect.required = true;
-
-  const placeholder = createElement(
-    "option",
-    "",
+  const coinPicker = createElement("div", "coin-picker");
+  const coinButton = createElement(
+    "button",
+    "coin-picker__button",
     state.market.length ? "Выберите монету" : "Монеты ещё загружаются",
   );
-  placeholder.value = "";
-  coinSelect.append(placeholder);
+  const coinMenu = createElement("div", "coin-picker__menu");
+  let selectedCoinId = "";
+
+  coinLabel.htmlFor = "transaction-coin";
+  coinButton.id = "transaction-coin";
+  coinButton.type = "button";
+  coinButton.setAttribute("aria-haspopup", "listbox");
+  coinButton.setAttribute("aria-expanded", "false");
+  coinButton.disabled = !state.market.length;
+  coinMenu.id = "transaction-coin-menu";
+  coinMenu.setAttribute("role", "listbox");
+  coinMenu.hidden = true;
+  coinButton.setAttribute("aria-controls", coinMenu.id);
 
   state.market.forEach((coin) => {
-    const option = createElement("option", "", `${coin.name} (${coin.symbol.toUpperCase()})`);
-    option.value = coin.id;
-    coinSelect.append(option);
+    const option = createElement(
+      "button",
+      "coin-picker__option",
+      `${coin.name} (${coin.symbol.toUpperCase()})`,
+    );
+    option.type = "button";
+    option.setAttribute("role", "option");
+    option.setAttribute("aria-selected", "false");
+    option.addEventListener("click", () => {
+      selectedCoinId = coin.id;
+      coinButton.textContent = `${coin.name} (${coin.symbol.toUpperCase()})`;
+      coinButton.classList.add("is-selected");
+      coinButton.setAttribute("aria-expanded", "false");
+      coinMenu.hidden = true;
+      if (coin.current_price != null) price.input.value = coin.current_price;
+    });
+    coinMenu.append(option);
   });
-  coinField.append(coinLabel, coinSelect);
+  coinButton.addEventListener("click", () => {
+    const willOpen = coinMenu.hidden;
+    coinMenu.hidden = !willOpen;
+    coinButton.setAttribute("aria-expanded", String(willOpen));
+  });
+  coinPicker.append(coinButton, coinMenu);
+  coinField.append(coinLabel, coinPicker);
 
   const quantity = createInput({
     id: "transaction-quantity",
@@ -66,18 +93,13 @@ function createTransactionForm(state, actions) {
   quantity.input.required = true;
   price.input.required = true;
 
-  coinSelect.addEventListener("change", () => {
-    const coin = state.market.find((item) => item.id === coinSelect.value);
-    if (coin?.current_price != null) price.input.value = coin.current_price;
-  });
-
   const submitButton = createElement("button", "button", "Добавить");
   submitButton.type = "submit";
   form.append(coinField, quantity.field, price.field, submitButton);
   form.addEventListener("submit", (event) => {
     // Отменяем стандартную перезагрузку браузера при отправке формы
     event.preventDefault();
-    const coin = state.market.find((item) => item.id === coinSelect.value);
+    const coin = state.market.find((item) => item.id === selectedCoinId);
     const quantityValue = Number(quantity.input.value);
     const priceValue = Number(price.input.value);
     if (!coin || quantityValue <= 0 || priceValue <= 0) return;
